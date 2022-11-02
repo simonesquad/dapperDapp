@@ -2,12 +2,15 @@ import './App.css';
 import { useState } from "react";
 import WalletInputs from './components/WalletInputs';
 import NativeTokens from './components/NativeTokens';
+import Tokens from './components/Tokens';
+import PortfolioValue from './components/PortfolioValue';
 
 function App() {
   const [wallet, setWallet] = useState("");
   const [chain, setChain] = useState("0x1");
   const [nativeBalance, setNativeBalance] = useState(0);
   const [nativeValue, setNativeValue] = useState([]);
+  const [tokens, setTokens] = useState([]);
 
   return (
     <div className="App">
@@ -30,6 +33,10 @@ function App() {
         chain={chain}
         tokens={tokens}
         setTokens={setTokens}
+      />
+      <PortfolioValue 
+        nativeValue={nativeValue}
+        tokens={tokens}
       />
 
     </div>
