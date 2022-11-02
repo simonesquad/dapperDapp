@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import "../App.css";
 
 function PortfolioValue({ tokens, nativeValue }) {
   const [totalValue, setTotalValue] = useState(0);
@@ -17,10 +18,12 @@ function PortfolioValue({ tokens, nativeValue }) {
 
   return (
     <>
-      <h1>Portfolio Total Value</h1>
-      <p>
-        <span>Total Balance: ${totalValue}</span>
-      </p>
+    <div className="totalValue">
+      <h3>Portfolio Total Value</h3>
+      <h2>
+       ${totalValue}
+      </h2>
+    </div>
     </>
   );
 }
