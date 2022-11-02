@@ -54,3 +54,42 @@ app.get('/nativeBalance', async (req, res) => {
 
 
 })
+
+//GET AMOUNT AND VALUE OF ERC20 TOKENS
+
+app.get("/tokenBalances", async (req, res) => {
+  await Moralis.start({ apiKey: process.env.MORALIS_API_KEY });
+
+  try {
+    const { address, chain } = req.query;
+
+    const response = await Moralis.EvmApi.token.getWalletTokenBalances({
+      address: address,
+      chain: chain,
+    });
+
+    let tokens = response.data;
+    let legitTokens = [];
+    for (let i = 0; i < tokens.length; i++) {
+      try {
+        const priceResponse = await Moralis.EvmApi.token.getTokenPrice({
+          address: tokens[i].token_address,
+          chain: chain,
+        });
+        if (priceResponse.data.usdPrice > 0.01) {
+          tokens[i].usd = priceResponse.data.usdPrice;
+          legitTokens.push(tokens[i]);
+        } else {
+          console.log("💩 coin");
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
+
+    res.send(legitTokens);
+  } catch (e) {
+    res.send(e);
+  }
+});
