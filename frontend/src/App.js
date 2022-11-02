@@ -4,6 +4,7 @@ import WalletInputs from './components/WalletInputs';
 import NativeTokens from './components/NativeTokens';
 import Tokens from './components/Tokens';
 import PortfolioValue from './components/PortfolioValue';
+import TransferHistory from './components/TransferHistory';
 
 function App() {
   const [wallet, setWallet] = useState("");
@@ -11,6 +12,7 @@ function App() {
   const [nativeBalance, setNativeBalance] = useState(0);
   const [nativeValue, setNativeValue] = useState([]);
   const [tokens, setTokens] = useState([]);
+  const [transfers, setTransfers] = useState([]);
 
   return (
     <div className="App">
@@ -37,6 +39,12 @@ function App() {
       <PortfolioValue 
         nativeValue={nativeValue}
         tokens={tokens}
+      />
+      <TransferHistory 
+        chain={chain}
+        wallet={wallet}
+        transfers={transfers}
+        setTransfers={setTransfers}
       />
 
     </div>
