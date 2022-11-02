@@ -138,3 +138,26 @@ app.get("/tokenTransfers", async (req, res) => {
     res.send(e);
   }
 });
+
+//GET Users NFT's
+
+app.get("/nftBalance", async (req, res) => {
+  await Moralis.start({ apiKey: process.env.MORALIS_API_KEY });
+
+  try {
+    const { address, chain } = req.query;
+
+    const response = await Moralis.EvmApi.nft.getWalletNFTs({
+      address: address,
+      chain: chain,
+    });
+
+    const userNFTs = response.data;
+
+    res.send(userNFTs);
+  } catch (e) {
+    res.send(e);
+  }
+});
+
+

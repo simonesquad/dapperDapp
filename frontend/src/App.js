@@ -5,6 +5,7 @@ import NativeTokens from './components/NativeTokens';
 import Tokens from './components/Tokens';
 import PortfolioValue from './components/PortfolioValue';
 import TransferHistory from './components/TransferHistory';
+import Nfts from './components/Nfts';
 
 function App() {
   const [wallet, setWallet] = useState("");
@@ -13,6 +14,7 @@ function App() {
   const [nativeValue, setNativeValue] = useState([]);
   const [tokens, setTokens] = useState([]);
   const [transfers, setTransfers] = useState([]);
+  const [nfts, setNfts] = useState([]);
 
   return (
     <div className="App">
@@ -45,6 +47,12 @@ function App() {
         wallet={wallet}
         transfers={transfers}
         setTransfers={setTransfers}
+      />
+      <Nfts 
+        wallet={wallet}
+        chain={chain}
+        nfts={nfts}
+        setNfts={setNfts}
       />
 
     </div>
