@@ -3,6 +3,8 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Reload } from "@web3uikit/icons";
 import { Input } from "@web3uikit/core"
+import { NFTBalance } from "@web3uikit/web3"
+import { wallet, chain } from "./WalletInputs";
 
 function Nfts({ chain, wallet, filteredNfts, setFilteredNfts, nfts, setNfts }) {
   const [nameFilter, setNameFilter] = useState("");
@@ -88,7 +90,11 @@ function Nfts({ chain, wallet, filteredNfts, setFilteredNfts, nfts, setNfts }) {
           onChange={(e) => setIdFilter(e.target.value)}
         />
         </div>
-        <div className="nftList">
+        <NFTBalance
+          address={wallet}
+          chain={chain}
+        >
+
             {filteredNfts.length > 0 &&
             
             filteredNfts.map((e) => {
@@ -104,7 +110,7 @@ function Nfts({ chain, wallet, filteredNfts, setFilteredNfts, nfts, setNfts }) {
                 );
             })
           }
-          </div>
+          </NFTBalance>
       
     </>
   );

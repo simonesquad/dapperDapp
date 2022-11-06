@@ -1,8 +1,8 @@
 import React from "react";
 import "../App.css";
-import {Input, Select, CryptoLogos} from '@web3uikit/core'
+import { Input, Select, CryptoLogos } from '@web3uikit/core'
 
-function WalletInputs({chain, wallet, setChain, setWallet}) {
+function WalletInputs({ chain, wallet, setChain, setWallet }) {
   return (
     <>
     <div className="header">
@@ -29,6 +29,12 @@ function WalletInputs({chain, wallet, setChain, setWallet}) {
             label: 'Ethereum',
             value: "0x1",
             prefix: <CryptoLogos chain="ethereum"/>
+          },
+          {
+            id: 'matic',
+            label: 'Polygon',
+            value: "0x89",
+            prefix: <CryptoLogos chain="polygon"/>
           },
           {
             id: 'matic',
