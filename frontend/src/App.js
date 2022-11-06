@@ -32,7 +32,11 @@ function App() {
           {wallet.length === 42 && (
             <>
               <div>
-                <Avatar isRounded size={130} theme="image" />
+                <Avatar 
+                  image="https://academy.moralis.io/wp-content/uploads/2021/12/Illustration4_home.svg"
+                  isRounded
+                  theme="image"
+                />
                 <h2>{`${wallet.slice(0, 6)}...${wallet.slice(36)}`}</h2>
               </div>
               <PortfolioValue
