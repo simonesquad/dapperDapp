@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Reload } from "@web3uikit/icons";
-import { Input } from "@web3uikit/core"
+import { Input, Card, Illustration } from "@web3uikit/core"
 import { NFTBalance } from "@web3uikit/web3"
 import { wallet, chain } from "./WalletInputs";
 
@@ -90,12 +90,68 @@ function Nfts({ chain, wallet, filteredNfts, setFilteredNfts, nfts, setNfts }) {
           onChange={(e) => setIdFilter(e.target.value)}
         />
         </div>
+
+        <div
+            style={{
+              width: '70vw',
+              display: 'flex'
+            }}
+          >
+            <Card
+              description="Coming Soon"
+              isDisabled
+              onClick={function noRefCheck(){}}
+              setIsSelected={function noRefCheck(){}}
+              title="NFT Collection"
+              tooltipText="Create your very own NFT Collection"
+            >
+              <div>
+                <Illustration
+                  height="180px"
+                  logo="lazyNft"
+                  width="100%"
+                />
+              </div>
+            </Card>
+            <Card
+              description="Coming Soon"
+              isDisabled
+              onClick={function noRefCheck(){}}
+              setIsSelected={function noRefCheck(){}}
+              title="NFT Collection"
+              tooltipText="Create your very own NFT Collection"
+            >
+              <div>
+                <Illustration
+                  height="180px"
+                  logo="lazyNft"
+                  width="100%"
+                />
+              </div>
+            </Card>
+            <Card
+              description="Coming Soon"
+              isDisabled
+              onClick={function noRefCheck(){}}
+              setIsSelected={function noRefCheck(){}}
+              title="NFT Collection"
+              tooltipText="Create your very own NFT Collection"
+            >
+              <div>
+                <Illustration
+                  height="180px"
+                  logo="lazyNft"
+                  width="100%"
+                />
+              </div>
+            </Card>
+          </div>
+
         <NFTBalance
           address={wallet}
           chain={chain}
         >
-
-            {filteredNfts.length > 0 &&
+          {filteredNfts.length > 0 &&
             
             filteredNfts.map((e) => {
                 return (
