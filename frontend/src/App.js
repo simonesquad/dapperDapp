@@ -1,5 +1,6 @@
 import "./App.css";
-import { useState } from "react";
+import React, { useState } from "react";
+import { useMoralis } from "react-moralis";
 import NativeTokens from "./components/NativeTokens";
 import Tokens from "./components/Tokens";
 import TransferHistory from "./components/TransferHistory";
@@ -7,6 +8,7 @@ import Nfts from "./components/Nfts";
 import WalletInputs from "./components/WalletInputs";
 import PortfolioValue from "./components/PortfolioValue";
 import { Avatar, TabList, Tab } from "@web3uikit/core";
+
 
 function App() {
   const [wallet, setWallet] = useState("");
@@ -18,6 +20,18 @@ function App() {
   const [filteredNfts, setFilteredNfts] = useState([]);
   const [transfers, setTransfers] = useState([]);
 
+  const { authenticate, isAuthenticated, user } = useMoralis();
+
+  if (!isAuthenticated) {
+    return (
+      <div>
+        <button onClick={() => authenticate(
+          { onComplete: () => alert("🎉🎉🎉")}
+        )}>Authenticate</button>
+      </div>
+    );
+  }
+
 
   return (
     <div className="App">
@@ -28,6 +42,9 @@ function App() {
         setWallet={setWallet}
       />
       <div className="content">
+        <div>
+          <h1>Hi {user.get("username")}</h1>
+        </div>
         <div>
           <Avatar 
             image="https://academy.moralis.io/wp-content/uploads/2021/12/Illustration4_home.svg"
