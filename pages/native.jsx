@@ -7,6 +7,7 @@ function Native({ nativeBalance, address }) {
         <div>
             <h3>Wallet: {address}</h3>
             <h3>Native Balance: {nativeBalance} ETH</h3>
+            {/* <h3>Token Balance: {tokenBalances} </h3> */}
         </div>
     );
 }
@@ -16,20 +17,26 @@ export async function getServerSideProps(context) {
   // reads the api key from .env.local and starts Moralis SDK
   await Moralis.start({ apiKey: process.env.MORALIS_API_KEY });
 
-  const address = '0x0B1957617336b8446CF05003E47CBe9CDa78Cb3e';
+  const address = process.env.METAMASK_ADDRESS;
 
   const nativeBalance = await Moralis.EvmApi.balance.getNativeBalance({
       chain: EvmChain.ETHEREUM,
       address,
   });
 
-  return {
-      props: { 
-          address,
-          // Return the native balance formatted in ether via the .ether getter
-          nativeBalance: nativeBalance.result.balance.ether 
-      },
-  };
-}
+//   const tokenBalances = await Moralis.EvmApi.token.getWalletTokenBalances({
+//     chain: EvmChain.ETHEREUM,
+//     address,
+//   }),
+
+    return {
+        props: { 
+            address,
+            // Return the native balance formatted in ether via the .ether getter
+            nativeBalance: nativeBalance.result.balance.ether
+            // tokenBalances: tokenBalances.result.map((token) => token.display()) 
+        },
+    };
+    }
 
 export default Native;
