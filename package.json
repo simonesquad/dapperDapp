@@ -1,0 +1,28 @@
+{
+  "name": "dapperdapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simonesquad/dapperDapp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/simonesquad/dapperDapp/issues"
+  },
+  "homepage": "https://github.com/simonesquad/dapperDapp#readme",
+  "dependencies": {
+    "moralis": "^2.7.4",
+    "next": "^13.0.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
