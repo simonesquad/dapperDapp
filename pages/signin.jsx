@@ -4,6 +4,9 @@ import { useAccount, useConnect, useSignMessage, useDisconnect } from 'wagmi';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 
+//** */ style stuff **//
+import { Illustration, Button, Row } from '@web3uikit/core';
+
 function SignIn() {
     const { connectAsync } = useConnect();
     const { disconnectAsync } = useDisconnect();
@@ -31,7 +34,7 @@ function SignIn() {
         const signature = await signMessageAsync({ message });
 
         // redirect user after success authentication to '/user' page
-        const { url } = await signIn('credentials', { message, signature, redirect: false, callbackUrl: '/user' });
+        const { url } = await signIn('credentials', { message, signature, redirect: false, callbackUrl: '/' });
         /**
          * instead of using signIn(..., redirect: "/user")
          * we get the url from callback and push it to the router to avoid page refreshing
@@ -41,8 +44,19 @@ function SignIn() {
 
     return (
         <div>
-            <h3>Web3 Authentication</h3>
-            <button onClick={() => handleAuth()}>Authenticate via Metamask</button>
+            <Illustration logo="marketplace" />
+            <Row
+                alignItems="center"
+                justifyItems="center"
+                lg={16}
+            >
+                <h3>Welcome to Dappyland! Authenticate via your Metamask wallet to Enter the Mystery</h3>
+                    <Button 
+                        onClick={() => handleAuth()}
+                        text="Authenticate via Metamask"
+                        theme="primary"
+                    />
+            </Row>
         </div>
     );
 }
