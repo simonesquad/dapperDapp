@@ -1,6 +1,9 @@
 import Moralis from 'moralis';
 import { EvmChain } from '@moralisweb3/evm-utils';
 
+// style stuff //
+import { ENSAvatar } from '@web3uikit/core';
+
 // props are passed from getServerSideProps
 function Native({ nativeBalance, address }) {
     return (
@@ -8,6 +11,10 @@ function Native({ nativeBalance, address }) {
             <h3>Wallet: {address}</h3>
             <h3>Native Balance: {nativeBalance} ETH</h3>
             {/* <h3>Token Balance: {tokenBalances} </h3> */}
+    
+            {/* <ENSAvatar
+            address="0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"
+            size={100}/> */}
         </div>
     );
 }

@@ -2,7 +2,7 @@ import Link from 'next/link'
 import User from './user'
 
 //** */ style stuff **//
-import { Row, Stepper } from '@web3uikit/core';
+import { Row, Stepper, Button } from '@web3uikit/core';
 
 function HomePage() {
 
@@ -19,18 +19,6 @@ function HomePage() {
           
             <div>
               <Link href="/">Home</Link>
-            </div>
-          
-            <div>
-              <Link href="/native">Native Balance</Link>
-            </div>
-         
-            <div>
-              <Link href="/protected">Access Your NFTs</Link>
-            </div>
-          
-            <div>
-              <Link href="/user">User Info</Link>
             </div>
          
         </Row>
@@ -52,16 +40,16 @@ function HomePage() {
                 title: 'Welcome to your Control Room "User"'
               },
               {
-                content: <div><p>If any button ID = next<br /></p><button id="next">next</button><p>It can be used to navigate<br /></p></div>,
+                content: <div><p>Access the Native Token balance for this wallet:<br /></p><Link href="/native">Native Balance</Link></div>,
                 title: 'What is my Native Token Balance?'
               },
               {
-                content: <div><p>If any button ID = prev<br /></p><button id="prev">prev</button><p>It can be used to navigate too<br /></p></div>,
-                title: 'Learn more'
+                content: <div><p>We've got your NFTs tucked away safely in a convenient dashboard here:<br /></p><Link href="/protected">Access Your NFTs</Link></div>,
+                title: 'Where are my NFTs?'
               },
               {
-                content: <p>Stepper is set to 100% height so you can use a parent div to control its height and it will fill the space dynamically. This parent div is set to 450px height. This means the buttons stay fixed to the bottom in the same place always</p>,
-                title: 'Heights'
+                content: <div><p>Securing your user details found here:</p><Link href="/user">User Info</Link></div>,
+                title: 'My Profile'
               },
               {
                 content: <p>you can pass any content, we hope you like the stepper</p>,
