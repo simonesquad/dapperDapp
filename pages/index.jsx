@@ -2,16 +2,16 @@ import Link from 'next/link';
 import { getSession, signOut } from 'next-auth/react';
 
 //** */ style stuff **//
-import { Row, Stepper } from '@web3uikit/core';
+import { Row, Stepper, Button } from '@web3uikit/core';
 
-function HomePage({ user }) {
+function HomePage() {
 
     return (
       <div>
         <Row
-          alignItems="center"
-          justifyItems="center"
-          lg={24}
+          alignItems="stretch"
+          justifyItems="space-between"
+          lg={34}
           md={24}
           sm={16}
           xs={8}
@@ -22,9 +22,12 @@ function HomePage({ user }) {
             </div>
 
             <div>
-              <button onClick={() => signOut({ redirect: '/signin' })}>Sign out</button>
-          </div>
-         
+              <Button 
+                onClick={() => signOut({ redirect: '/signin' })} 
+                text="Sign Out"
+                size="small"
+              />
+          </div>     
         </Row>
 
 
