@@ -2,7 +2,7 @@ import Moralis from 'moralis';
 import { EvmChain } from '@moralisweb3/evm-utils';
 
 // style stuff //
-import { ENSAvatar } from '@web3uikit/core';
+// import { NativeBalance, ENSAvatar } from '@web3uikit/core';
 
 // props are passed from getServerSideProps
 function Native({ nativeBalance, address }) {

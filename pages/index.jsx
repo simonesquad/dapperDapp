@@ -1,10 +1,10 @@
-import Link from 'next/link'
-import User from './user'
+import Link from 'next/link';
+import { getSession, signOut } from 'next-auth/react';
 
 //** */ style stuff **//
-import { Row, Stepper, Button } from '@web3uikit/core';
+import { Row, Stepper } from '@web3uikit/core';
 
-function HomePage() {
+function HomePage({ user }) {
 
     return (
       <div>
@@ -20,6 +20,10 @@ function HomePage() {
             <div>
               <Link href="/">Home</Link>
             </div>
+
+            <div>
+              <button onClick={() => signOut({ redirect: '/signin' })}>Sign out</button>
+          </div>
          
         </Row>
 
@@ -59,7 +63,25 @@ function HomePage() {
           />
         </div>
       </div>
-    )
+    );
   }
+
+  export async function getServerSideProps(context) {
+    const session = await getSession(context);
+    
+    // redirect if not authenticated
+    if (!session) {
+        return {
+            redirect: {
+                destination: '/signin',
+                permanent: false,
+            },
+        };
+    }
+
+    return {
+        props: { user: session.user },
+    };
+}
   
-  export default HomePage
+  export default HomePage;
