@@ -1,15 +1,12 @@
+import { Table } from '@web3uikit/core';
+
 function Transactions({ transactions }) {
     return (
         <div>
             <p>Wallet Transactions:</p>
-
             <div>
                 <table>
-                    {/* <tr>
-                        <td>Value</td>
-                        <td>Block #</td>
-                        <td>Cumulative Gas Used</td>
-                    </tr> */}
+                    
                     <tr>
                     {transactions.map((transaction) => (
                         <td key={transaction.hash}>{transaction.value}/</td>

@@ -55,8 +55,8 @@ function HomePage() {
                 title: 'Where are my NFTs?'
               },
               {
-                content: <div><p>Securing your user details found here:</p><Link href="/user">User Info</Link></div>,
-                title: 'My Profile'
+                content: <div><p>Curious what you've been up to? Check the transations for this wallet here:</p><Link href="/transactions">Transactions</Link></div>,
+                title: 'My Activity'
               },
               {
                 content: <p>you can pass any content, we hope you like the stepper</p>,

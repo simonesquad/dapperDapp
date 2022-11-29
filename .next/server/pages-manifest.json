@@ -3,6 +3,5 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js",
-  "/transactions": "pages/transactions.js",
-  "/api/transactions": "pages/api/transactions.js"
+  "/": "pages/index.js"
 }
