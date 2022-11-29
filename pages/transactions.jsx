@@ -1,29 +1,54 @@
-import Moralis from 'moralis';
-import { EvmChain } from '@moralisweb3/evm-utils';
-
-function Transactions({ address, walletTransactions }) {
+function Transactions({ transactions }) {
     return (
         <div>
-            <h3>Wallet: {address}</h3>
             <p>Wallet Transactions:</p>
-            <ul>
-                {walletTransactions.map((walletTransaction) => (
-                    <li key={walletTransaction}>{walletTransaction}</li>
-                ))}
-            </ul>
+
+            <div>
+                <table>
+                    {/* <tr>
+                        <td>Value</td>
+                        <td>Block #</td>
+                        <td>Cumulative Gas Used</td>
+                    </tr> */}
+                    <tr>
+                    {transactions.map((transaction) => (
+                        <td key={transaction.hash}>{transaction.value}/</td>
+                        ))}
+                    </tr>
+                    
+                    <tr>
+                    {transactions.map((transaction) => (
+                        <td key={transaction.hash}>{transaction.blockNumber}/</td>
+                        ))}
+                    </tr>
+
+                    <tr>
+                    {transactions.map((transaction) => (
+                        <td key={transaction.hash}>{transaction.cumulativeGasUsed}/</td>
+                        ))}
+                    </tr>
+
+                    <tr>
+                    {transactions.map((transaction) => (
+                        <td key={transaction.hash}>{transaction.gasPrice}/</td>
+                        ))}
+                    </tr>
+
+                    <tr>
+                    {transactions.map((transaction) => (
+                        <td key={transaction.hash}>{transaction.blockTimestamp}/</td>
+                        ))}
+                    </tr>
+                </table>
+            </div>       
         </div>
     );
 }
 
-export async function getServerSideProps() {
-  const res = await fetch(`https://localhost:3000/api/transactions`)
-  const walletTransactions = await res.json()
-
-    return {
-        props: { 
-            walletTransactions
-        },
-    };
-    }
+Transactions.getInitialProps = async (ctx) => {
+    const res = await fetch(`http://localhost:3000/api/transactions`)
+    const json = await res.json()
+    return { transactions: json.walletTransactions }
+}
 
 export default Transactions;
