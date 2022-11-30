@@ -4,10 +4,11 @@ import { getSession, signOut } from 'next-auth/react';
 //** */ style stuff **//
 import { Row, Stepper, Button } from '@web3uikit/core';
 
+
 function HomePage() {
 
     return (
-      <div>
+      <div class=".bg-secondary.bg-gradient">
         <Row
           alignItems="stretch"
           justifyItems="space-between"

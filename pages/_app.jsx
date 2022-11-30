@@ -1,6 +1,7 @@
 import { createClient, configureChains, defaultChains, WagmiConfig } from 'wagmi';
 import { publicProvider } from 'wagmi/providers/public';
 import { SessionProvider } from 'next-auth/react';
+import Layout from './components/layout'
 // styles //
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/globals.css";
@@ -20,11 +21,15 @@ function MyApp({ Component, pageProps }) {
   }, []);
   
   return (
-    <WagmiConfig client={client}>
-      <SessionProvider session={pageProps.session} refetchInterval={0}>
-        <Component {...pageProps} />
-      </SessionProvider>
-    </WagmiConfig>
+    
+      <WagmiConfig client={client}>
+        <SessionProvider session={pageProps.session} refetchInterval={0}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </SessionProvider>
+      </WagmiConfig>
+    
   );
 }
 
