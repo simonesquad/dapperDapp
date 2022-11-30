@@ -1,37 +1,14 @@
 import Link from 'next/link';
-import { getSession, signOut } from 'next-auth/react';
+import { getSession } from 'next-auth/react';
 
 //** */ style stuff **//
-import { Row, Stepper, Button } from '@web3uikit/core';
+import { Stepper } from '@web3uikit/core';
 
 
 function HomePage() {
 
     return (
       <div class=".bg-secondary.bg-gradient">
-        <Row
-          alignItems="stretch"
-          justifyItems="space-between"
-          lg={34}
-          md={24}
-          sm={16}
-          xs={8}
-        >
-          
-            <div>
-              <Link href="/">Home</Link>
-            </div>
-
-            <div>
-              <Button 
-                onClick={() => signOut({ redirect: '/signin' })} 
-                text="Sign Out"
-                size="small"
-              />
-          </div>     
-        </Row>
-
-
         <div
           style={{
             height: '1px',
@@ -48,20 +25,20 @@ function HomePage() {
                 title: 'Welcome to your Control Room "User"'
               },
               {
-                content: <div><p>Access the Native Token balance for this wallet:<br /></p><Link href="/native">Native Balance</Link></div>,
+                content: <div><p>Access the Native Token balance for this wallet:<br /></p><Link href="/native"><button type="button" class="btn btn-secondary btn-lg">Native Balance</button></Link></div>,
                 title: 'What is my Native Token Balance?'
               },
               {
-                content: <div><p>We've got your NFTs tucked away safely in a convenient dashboard here:<br /></p><Link href="/protected">Access Your NFTs</Link></div>,
+                content: <div><p>We've got your NFTs tucked away safely in a convenient dashboard here:<br /></p><Link href="/protected"><button type="button" class="btn btn-secondary btn-lg">Access Your NFTs</button></Link></div>,
                 title: 'Where are my NFTs?'
               },
               {
-                content: <div><p>Curious what you've been up to? Check the transations for this wallet here:</p><Link href="/transactions">Transactions</Link></div>,
+                content: <div><p>Curious what you've been up to? Check the transations for this wallet here:</p><Link href="/transactions"><button type="button" class="btn btn-secondary btn-lg">Transactions</button></Link></div>,
                 title: 'My Activity'
               },
               {
-                content: <p>you can pass any content, we hope you like the stepper</p>,
-                title: 'Hope you enjoy'
+                content: <div><p>Feel free to email our team and we will get back to you as quickly as possible!</p><Link href="/transactions"><button type="button" class="btn btn-secondary btn-lg">Contact Us</button></Link></div>,
+                title: 'Have further questions?'
               }
             ]}
           />
