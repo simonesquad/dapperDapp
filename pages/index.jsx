@@ -37,7 +37,7 @@ function HomePage() {
                 title: 'My Activity'
               },
               {
-                content: <div><p>Feel free to email our team and we will get back to you as quickly as possible!</p><Link href="/transactions"><button type="button" class="btn btn-secondary btn-lg">Contact Us</button></Link></div>,
+                content: <div><p>Feel free to email our team and we will get back to you as quickly as possible!</p><Link href="/contact"><button type="button" class="btn btn-secondary btn-lg">Contact Us</button></Link></div>,
                 title: 'Have further questions?'
               }
             ]}
