@@ -5,7 +5,7 @@ function Navbar() {
     return (
         <>
             <nav class="navbar navbar-expand-xl bg-info">
-                <div class="d-flex justify-content-between">
+                <div class="d-flex flex-row mb-3 .justify-content-lg-evenly">
                         <a class="navbar-brand" href="/">
                         <span class="navbar-text">
                             Dappy!

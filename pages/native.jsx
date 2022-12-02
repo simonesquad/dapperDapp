@@ -1,11 +1,20 @@
 import Moralis from 'moralis';
 import { EvmChain } from '@moralisweb3/evm-utils';
+import { CryptoLogos } from '@web3uikit/core';
 
 function Native({ nativeBalance, address }) {
     return (
-        <div>
-            <h3>Wallet: {address}</h3>
-            <h3>Native Balance: {nativeBalance} ETH</h3>
+        <div class="d-flex flex-column mb-3">
+            <div class="p-2">
+                <h3>Wallet: {address}</h3>
+            </div>
+            <div class="p-2">
+                <h3>Native Balance: {nativeBalance} ETH</h3>
+                <CryptoLogos 
+                    chain="ethereum"
+                    size="48px"
+                />
+            </div>
         </div>
     );
 }
