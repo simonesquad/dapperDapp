@@ -25,10 +25,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/protected": [
+    "/contract": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/protected.js"
+      "static/chunks/pages/contract.js"
     ]
   },
   "ampFirstPages": []

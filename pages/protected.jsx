@@ -1,35 +1,36 @@
-import { getSession } from 'next-auth/react';
 import Moralis from 'moralis';
 import { EvmChain } from '@moralisweb3/evm-utils';
+import { NFTBalance } from '@web3uikit/core';
 
-function Protected({ message, nftList }) {
+
+function Protected({ message, nftList, address }) {
+
     return (
-        <div>
-            <h3>Protected content</h3>
-            <p>{message}</p>
-            <pre>{JSON.stringify(nftList, null, 2)}</pre>
-        </div>
+        <>
+            <div>
+                <h3>Protected content</h3>
+                <p>{message}</p>
+                <pre>{JSON.stringify(nftList, null, 2)}</pre>
+                <section>
+                    {nftList}
+                    {/* <NFTBalance 
+                        address={address}
+                        chain='ethereum'
+                    /> */}
+                </section>
+            </div>
+        </>
     );
 }
 
 export async function getServerSideProps(context) {
-    const session = await getSession(context);
+  await Moralis.start({ apiKey: process.env.MORALIS_API_KEY });
 
-    if (!session) {
-        return {
-            redirect: {
-                destination: '/signin',
-                permanent: false,
-            },
-        };
-    }
+  const address = process.env.METAMASK_ADDRESS,
 
-    await Moralis.start({ apiKey: process.env.MORALIS_API_KEY });
-
-    const nftList = await Moralis.EvmApi.nft.getWalletNFTs({
-        chain: EvmChain.ETHEREUM,
-        address: session.user.address,
-        tokenAddress: '0x...',
+  const nftList = await Moralis.EvmApi.nft.getWalletNFTs({
+      chain: EvmChain.ETHEREUM,
+      address,
     });
 
     return {
@@ -37,7 +38,9 @@ export async function getServerSideProps(context) {
             message:
                 // if user has at least one NFT he will get congrats message
                 nftList.raw.total > 0 ? 'Nice! You have our NFT' : "Sorry, you don't have our NFT",
+            address
         },
     };
 }
+
 export default Protected;
