@@ -5,7 +5,7 @@ function Layout({ children }) {
   return (
     <>
       <Navbar />
-      <main>{children}</main>
+      <main style={{marginTop: "3rem"}}>{children}</main>
       <Footer />
     </>
   )

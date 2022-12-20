@@ -1,12 +1,23 @@
 import Moralis  from 'moralis';
 import { EvmChain } from '@moralisweb3/evm-utils';
+import { useRouter } from "next/router";
+
+// export async function getAddress() {
+//     const response = await fetch(`${address}/api/form`)
+//     const jsonData = await response.json()
+//     return jsonData
+// }
 
 export default async function handler(req, res) {
     await Moralis.start({ apiKey: process.env.MORALIS_API_KEY});
 
+    // const address = req.body.address
+
+    // const address = '0xC178994cB9b66307Cd62dB8b411759Dd36D9C2EE';
+
     const chain = EvmChain.ETHEREUM;
 
-    const address = '0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d';
+    const { query } = useRouter(req.query);
 
     const totalRanges = 1000;
 
@@ -14,7 +25,7 @@ export default async function handler(req, res) {
 
     const [contractNfts] = await Promise.all([
         Moralis.EvmApi.nft.getContractNFTs({
-            address,
+            address: query.address,
             chain,
             totalRanges,
             range,
