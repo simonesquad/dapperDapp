@@ -1,122 +1,119 @@
 import { useState } from 'react';
 import axios from "axios";
-// import { EvmChain } from '@moralisweb3/evm-utils';
-//ADD SOME COMMENT HERE
+import { EvmChain } from '@moralisweb3/evm-utils';
 
 function Contract() {
-    const [address, setAddress] = useState("");
-    const [chain, setChain] = useState("0x1");
-    const [cursor, setCursor] = useState("");
-    const [NFTs, setNFTs] = useState([]);
+    const [result, setResult] = useState([]);
+    const [address, setAddress] = useState('');
+    // let address = "";
 
-    function getImgUrl(metadata) {
-        if (!metadata) return logo;
-    
-        let meta = JSON.parse(metadata);
-    
-        if (!meta.image) return logo;
-    
-        if (!meta.image.includes("ipfs://")) {
-          return meta.image;
-        } else {
-          return "https://ipfs.io/ipfs/" + meta.image.substring(7);
-        }
-      }
+    // const handleSubmit = async () => {
+    //     setAddress(document.querySelector("#contractAddress").value);
+    //     const chain = EvmChain.ETHEREUM;
 
-      async function fetchNFTs() {
-        let res;
-        if (cursor) {
-          res = await axios.get(`http://localhost:5000/api/contract`, {
-            params: { address: address, chain: chain, cursor: cursor },
-          });
-        } else {
-          res = await axios.get(`http://localhost:5000/api/contract`, {
-            params: { address: address, chain: chain },
-          });
+    //     const response = await axios.get(`http://localhost:5000/api/contract`, 
+    //     { params: { address, chain }, 
+    // });
+
+    // console.log(response);
+    // setResult(response.data);
+    // document.querySelector("#contractAddress").value = "";
+    // };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault()
+
+        const data = {
+            address: event.target.address.value,
         }
 
-        console.log(res);
+        const JSONdata = JSON.stringify(data)
 
-        let n = NFTs;
-        setNFTs(n.concat(res.data.result.result));
-        setCursor(res.data.result.cursor);
-        console.log(res);
+        const endpoint = '/api/contract'
+
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSONdata,
         }
 
-        function addressChange(e) {
-            setAddress(e.target.value);
-            setCursor(null);
-            setNFTs([]);
-        }
+        const response = await fetch(endpoint, options)
 
-        function chainChange(e) {
-            setChain(e.target.value);
-            setCursor(null);
-            setNFTs([]);
-        }
+        const result = await response.json()
+        alert(`Is this your full contract address: ${result.data} ?`)
+    }
 
-        return (
-            <>
-              <div className="App">
-                <div style={{ fontSize: "23px", fontWeight: "700" }}>
-                  Get NFTs by contract
-                </div>
-                <button className="bu" onClick={fetchNFTs}>
-                  Get NFT's
-                </button>
-                <div className="inputs">
-                  <div style={{ display: "flex" }}>
-                    <div style={{ width: "80px" }}>Contract:</div>
-                    <input
-                      className="input"
-                      value={address}
-                      onChange={(e) => addressChange(e)}
-                    ></input>
-                  </div>
-                  <div style={{ display: "flex" }}>
-                    <div style={{ width: "80px" }}>Chain:</div>
-                    <select className="input" onChange={(e) => chainChange(e)}>
-                      <option value="0x1">Ethereum</option>
-                      <option value="0x38">Bsc</option>
-                      <option value="0x89">Polygon</option>
-                      <option value="0xa86a">Avalanche</option>
-                    </select>
-                  </div>
-                </div>
-                {NFTs.length > 0 && (
-                  <>
-                    <div className="results">
-                      {NFTs?.map((e, i) => {
-                        return (
-                          <>
-                            <div style={{ width: "70px" }}>
-                              <img
-                                loading="lazy"
-                                width={70}
-                                src={getImgUrl(e.metadata)}
-                                alt={`${i}image`}
-                                style={{ borderRadius: "5px", marginTop: "10px" }}
-                              />
-                              <div key={i} style={{ fontSize: "10px" }}>
-                                {`${e.name}\n${e.token_id}`}
-                              </div>
-                            </div>
-                          </>
-                        );
-                      })}
+    const renderItems = () => {
+        return result.map(({ tokenHash, tokenId, blockNumberMinted, amount, name, metadata }) => {
+
+            function getImgUrl(metadata) {
+
+                if (!metadata.image.includes("ipfs://")) {
+                    return metadata.image;
+                } else {
+                    return "https://ipfs.io/ipfs/" + metadata.image.substring(7);
+                }
+            }
+
+
+            return <div key={tokenHash} class="card" style={{width: "25rem", padding: "2rem", margin: "2rem", backgroundColor: "#FFFFF7"}}>
+                        <img src={getImgUrl(metadata)} class="card-img-top" alt="why" />
+                        <div class="card-body">
+                            <h6 class="card-title">Name: {name}</h6>
+                            <p class="card-text">Token Id: {tokenId}</p>
+                            <p class="card-text">Block Number Minted: {blockNumberMinted}</p>
+                            <p class="card-text">Amount Minted: {amount}</p>
+                        </div>
                     </div>
-                    {cursor && (
-                      <>
-                        <button className="bu" onClick={fetchNFTs}>
-                          Load More
-                        </button>
-                      </>
-                    )}
-                  </>
-                )}
-              </div>
-            </>
-          );
-        }
+
+        })
+    }
+
+    return (
+        <>
+            <div class="container-fluid">
+                <h3 class="fw-semibold">NFT Gallery</h3>
+                <h5>Search for an NFT Collection by Contract</h5>
+                <form 
+                    class="d-flex" 
+                    role="search" 
+                    style={{width: "35rem", 
+                    height: "3rem"}}
+                    method="POST"
+                    action="#"
+                >
+                <input 
+                    class="form-control me-3" 
+                    type="text" 
+                    placeholder="NFT Contract Address" 
+                    aria-label="Search Contract Address" 
+                    id="contractAddress" 
+                    name="contractAddress"
+                    required
+                />
+                <button 
+                    class="btn btn-outline-success" 
+                    onClick={handleSubmit}
+                >Search
+                </button>
+                </form>
+            </div>
+            <div class="row">
+                {renderItems()}
+            </div>
+        </>
+    );
+}
+
+    // Contract.getInitialProps = async (ctx) => {
+    //     const res = await fetch(`http://localhost:3000/api/nftsByContract`)
+    //     const json = JSON.parse(res)
+
+    //     return { 
+    //         nfts: json.contractNfts
+    //     }
+    // }
 
     export default Contract;
