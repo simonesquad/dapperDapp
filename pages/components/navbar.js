@@ -4,8 +4,8 @@ import { signOut } from 'next-auth/react';
 function Navbar() {
     return (
         <>
-            <nav class="navbar navbar-expand-xl bg-info">
-                <div class="d-flex flex-row mb-3 .justify-content-lg-evenly">
+            <nav class="navbar navbar-expand-xl" style={{backgroundColor: "#FFFFF7"}}>
+                <div class="container-fluid">
                         <a class="navbar-brand" href="/">
                         <span class="navbar-text">
                             Dappy!

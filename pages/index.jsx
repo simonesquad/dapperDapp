@@ -29,7 +29,7 @@ function HomePage() {
                 title: 'What is my Native Token Balance?'
               },
               {
-                content: <div><p>We've got your NFTs tucked away safely in a convenient dashboard here:<br /></p><Link href="/protected"><button type="button" class="btn btn-secondary btn-lg">Access Your NFTs</button></Link></div>,
+                content: <div><p>Here you can view your NFTs by their publicly available smart contract address:<br /></p><Link href="/contract"><button type="button" class="btn btn-secondary btn-lg">Access Your NFTs</button></Link></div>,
                 title: 'Where are my NFTs?'
               },
               {

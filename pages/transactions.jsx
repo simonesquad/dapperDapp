@@ -8,7 +8,7 @@ function Transactions({ transactions }) {
     const [values, setValues] = useState(transactions);
 
     const renderValues = () => {
-        return values.map(({ hash, value, blockNumber, cumulativeGasUsed, gasPrice, blockTimestamp}) => {
+        return values.map(({ hash, value, blockNumber, cumulativeGasUsed, gasPrice, blockTimestamp }) => {
             return <tr key={hash} >
                 <td>{value}</td>
                 <td>{blockNumber}</td>
@@ -47,33 +47,3 @@ Transactions.getInitialProps = async (ctx) => {
 }
 
 export default Transactions;
-
-{/* <th scope="col">
-{transactions.map((transaction) => (
-    <td key={transaction.hash}>{transaction.value}/</td>
-    ))}
-</th>
-
-<th scope="col">
-{transactions.map((transaction) => (
-    <td key={transaction.hash}>{transaction.blockNumber}/</td>
-    ))}
-</th>
-
-<th scope="col">
-{transactions.map((transaction) => (
-    <td key={transaction.hash}>{transaction.cumulativeGasUsed}/</td>
-    ))}
-</th>
-
-<th scope="col">
-{transactions.map((transaction) => (
-    <td key={transaction.hash}>{transaction.gasPrice}/</td>
-    ))}
-</th>
-
-<th scope="col">
-{transactions.map((transaction) => (
-    <td key={transaction.hash}>{transaction.blockTimestamp}/</td>
-    ))}
-</th> */}
