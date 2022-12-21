@@ -16,12 +16,15 @@ app.get("/api/contract", async (req, res) => {
     if (query.cursor) {
       NFTs = await Moralis.EvmApi.nft.getContractNFTs({
         address: query.address,
-        chain: query.chain
+        chain: query.chain,
+        cursor: query.cursor,
+        limit: 10,
       });
     } else {
       NFTs = await Moralis.EvmApi.nft.getContractNFTs({
         address: query.address,
-        chain: query.chain
+        chain: query.chain,
+        limit: 10,
       });
     }
 

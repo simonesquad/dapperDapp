@@ -1,49 +1,7 @@
 import { useState } from 'react';
-import axios from "axios";
-import { EvmChain } from '@moralisweb3/evm-utils';
 
-function Contract() {
-    const [result, setResult] = useState([]);
-    const [address, setAddress] = useState('');
-    // let address = "";
-
-    // const handleSubmit = async () => {
-    //     setAddress(document.querySelector("#contractAddress").value);
-    //     const chain = EvmChain.ETHEREUM;
-
-    //     const response = await axios.get(`http://localhost:5000/api/contract`, 
-    //     { params: { address, chain }, 
-    // });
-
-    // console.log(response);
-    // setResult(response.data);
-    // document.querySelector("#contractAddress").value = "";
-    // };
-
-    const handleSubmit = async (event) => {
-        event.preventDefault()
-
-        const data = {
-            address: event.target.address.value,
-        }
-
-        const JSONdata = JSON.stringify(data)
-
-        const endpoint = '/api/contract'
-
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSONdata,
-        }
-
-        const response = await fetch(endpoint, options)
-
-        const result = await response.json()
-        alert(`Is this your full contract address: ${result.data} ?`)
-    }
+function Contract({ nfts }) {
+    const [result, setResult] = useState(nfts);
 
     const renderItems = () => {
         return result.map(({ tokenHash, tokenId, blockNumberMinted, amount, name, metadata }) => {
@@ -95,7 +53,6 @@ function Contract() {
                 />
                 <button 
                     class="btn btn-outline-success" 
-                    onClick={handleSubmit}
                 >Search
                 </button>
                 </form>
@@ -107,13 +64,10 @@ function Contract() {
     );
 }
 
-    // Contract.getInitialProps = async (ctx) => {
-    //     const res = await fetch(`http://localhost:3000/api/nftsByContract`)
-    //     const json = JSON.parse(res)
+    Contract.getInitialProps = async (ctx) => {
+        const res = await fetch(`http://localhost:3000/api/nftsByContract`)
+        const json = await res.json()
+        return { nfts: json.contractNfts }
+    }
 
-    //     return { 
-    //         nfts: json.contractNfts
-    //     }
-    // }
-
-    export default Contract;
+export default Contract;
