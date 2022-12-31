@@ -1,45 +1,45 @@
 const express = require("express");
 const Moralis = require("moralis").default;
+require("dotenv").config();
 const app = express();
 const cors = require("cors");
 const port = 5000;
+const { EvmChain } = require("@moralisweb3/common-evm-utils");
 
 app.use(cors());
-app.use(express.json());
 
 app.get("/api/contract", async (req, res) => {
-  try {
-    const { query } = req;
+  
+  const { query } = req;
+  const chain = EvmChain.ETHEREUM;
 
-    let NFTs;
+  const response = await Moralis.EvmApi.nft.getWalletNFTs({
+    address: query.address,
+    chain: chain
+  })
 
-    if (query.cursor) {
-      NFTs = await Moralis.EvmApi.nft.getContractNFTs({
-        address: query.address,
-        chain: query.chain,
-        cursor: query.cursor,
-        limit: 10,
-      });
-    } else {
-      NFTs = await Moralis.EvmApi.nft.getContractNFTs({
-        address: query.address,
-        chain: query.chain,
-        limit: 10,
-      });
-    }
+  // console.log(response);
 
-    const result = NFTs.raw;
+//   let imgs = [];
 
-    return res.status(200).json({ result });
-  } catch (e) {
+//   for (nft of response.raw.result){
+//     let url = JSON.parse(nft.metadata).image
 
-    console.log(e);
-    console.log("something went wrong");
-    return res.status(400).json();
+//     if (!url) continue
+//     if (url?.includes("ipfs://")) {
+//         imgs.push("https://ipfs.io/ipfs/" + url.substring(7));
+//     } else {
+//         imgs.push(url)
+//     }
+    
+// }
 
-  }
+// console.log(imgs)
+// res.send(imgs);
+  console.log(response);
+  res.send(response);
+
 });
-
 
 Moralis.start({
   apiKey: process.env.MORALIS_API_KEY,
