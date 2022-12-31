@@ -4,6 +4,12 @@ import { EvmChain } from '@moralisweb3/evm-utils';
 export default async function handler(req, res) {
     await Moralis.start({ apiKey: process.env.MORALIS_API_KEY});
 
+    // console.log(req.method);
+    // console.log(req.body);
+    // console.log(req.body.address);
+
+    // const address = req.body.address
+    
     const address = '0xC178994cB9b66307Cd62dB8b411759Dd36D9C2EE';
 
     const chain = EvmChain.ETHEREUM;

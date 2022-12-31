@@ -1,10 +1,29 @@
+import axios from "axios";
 import { useState } from 'react';
 
-function Contract({ nfts }) {
-    const [result, setResult] = useState(nfts);
+function Contract() {
+    const [address, setAddress] = useState("");
+    const [nfts, setNfts] = useState(null);
+    // const [result, setResult] = useState(nfts);
+
+    async function getNfts(){
+        console.log(address)
+        const response = await axios.get("http://localhost:5000/api/contract", {
+            params: {
+                address: address
+            }
+        })
+        console.log(response.data);
+        setNfts(response.data)
+    }
+
+    function handleChangeSearch(e) {
+        setAddress(e.target.vlaue)
+    }
 
     const renderItems = () => {
-        return result.map(({ tokenHash, tokenId, blockNumberMinted, amount, name, metadata }) => {
+
+        return nfts?.map(({ tokenHash, tokenId, blockNumberMinted, amount, name, metadata }) => {
 
             function getImgUrl(metadata) {
 
@@ -39,21 +58,25 @@ function Contract({ nfts }) {
                     role="search" 
                     style={{width: "35rem", 
                     height: "3rem"}}
-                    method="POST"
-                    action="#"
+                    method="post"
+                    action="/api/contract"
                 >
+                <label htmlFor="address">Address</label>
                 <input 
                     class="form-control me-3" 
                     type="text" 
                     placeholder="NFT Contract Address" 
                     aria-label="Search Contract Address" 
-                    id="contractAddress" 
-                    name="contractAddress"
+                    id="searchField" 
+                    name="search_term"
+                    value={address}
+                    onChange={handleChangeSearch}
                     required
                 />
                 <button 
                     class="btn btn-outline-success" 
-                >Search
+                    onClick={getNfts}
+                >Search for NFTs
                 </button>
                 </form>
             </div>
@@ -64,10 +87,10 @@ function Contract({ nfts }) {
     );
 }
 
-    Contract.getInitialProps = async (ctx) => {
-        const res = await fetch(`http://localhost:3000/api/nftsByContract`)
-        const json = await res.json()
-        return { nfts: json.contractNfts }
-    }
+    // Contract.getInitialProps = async (ctx) => {
+    //     const res = await fetch(`http://localhost:3000/api/nftsByContract`)
+    //     const json = await res.json()
+    //     return { nfts: json.contractNfts }
+    // }
 
 export default Contract;
