@@ -18,24 +18,6 @@ app.get("/api/contract", async (req, res) => {
     chain: chain
   })
 
-  // console.log(response);
-
-//   let imgs = [];
-
-//   for (nft of response.raw.result){
-//     let url = JSON.parse(nft.metadata).image
-
-//     if (!url) continue
-//     if (url?.includes("ipfs://")) {
-//         imgs.push("https://ipfs.io/ipfs/" + url.substring(7));
-//     } else {
-//         imgs.push(url)
-//     }
-    
-// }
-
-// console.log(imgs)
-// res.send(imgs);
   console.log(response);
   res.send(response);
 

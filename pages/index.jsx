@@ -1,13 +1,14 @@
 import Link from 'next/link';
 import { getSession } from 'next-auth/react';
-
 //** */ style stuff **//
 import { Stepper } from '@web3uikit/core';
+import Layout from './components/layout';
 
 
 function HomePage() {
 
     return (
+      <Layout>
       <div class=".bg-secondary.bg-gradient">
         <div
           style={{
@@ -44,6 +45,7 @@ function HomePage() {
           />
         </div>
       </div>
+      </Layout>
 
 
     

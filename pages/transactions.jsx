@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Layout from './components/layout';
 
 const TITLES = [
     'Value', 'Block Number', 'Total Gas Used', 'Gas Price at Time', 'Timestamp'
@@ -26,17 +27,19 @@ function Transactions({ transactions }) {
     }
 
     return (
-        <div>
-            <p>Wallet Transactions:</p>
+        <Layout>
             <div>
-                <table class="table">
-                        {renderHeader()}
-                    <tbody>
-                        {renderValues()}
-                    </tbody>
-                </table>
-            </div>       
-        </div>
+                <p>Wallet Transactions:</p>
+                <div>
+                    <table class="table">
+                            {renderHeader()}
+                        <tbody>
+                            {renderValues()}
+                        </tbody>
+                    </table>
+                </div>       
+            </div>
+        </Layout>
     );
 }
 

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from 'react';
+import Layout from './components/layout';
 
 function Contract() {
     const [address, setAddress] = useState("");
@@ -50,39 +51,41 @@ function Contract() {
 
     return (
         <>
-            <div class="container-fluid">
-                <h3 class="fw-semibold">NFT Gallery</h3>
-                <h5>Search for an NFT Collection by Contract</h5>
-                <form 
-                    class="d-flex" 
-                    role="search" 
-                    style={{width: "35rem", 
-                    height: "3rem"}}
-                    method="post"
-                    action="/api/contract"
-                >
-                <label htmlFor="address">Address</label>
-                <input 
-                    class="form-control me-3" 
-                    type="text" 
-                    placeholder="NFT Contract Address" 
-                    aria-label="Search Contract Address" 
-                    id="searchField" 
-                    name="search_term"
-                    value={address}
-                    onChange={handleChangeSearch}
-                    required
-                />
-                <button 
-                    class="btn btn-outline-success" 
-                    onClick={getNfts}
-                >Search for NFTs
-                </button>
-                </form>
-            </div>
-            <div class="row">
-                {renderItems()}
-            </div>
+            <Layout>
+                <div class="container-fluid">
+                    <h3 class="fw-semibold">NFT Gallery</h3>
+                    <h5>Search for an NFT Collection by Contract</h5>
+                    <form 
+                        class="d-flex" 
+                        role="search" 
+                        style={{width: "35rem", 
+                        height: "3rem"}}
+                        method="post"
+                        action="/api/contract"
+                    >
+                    <label htmlFor="address">Address</label>
+                    <input 
+                        class="form-control me-3" 
+                        type="text" 
+                        placeholder="NFT Contract Address" 
+                        aria-label="Search Contract Address" 
+                        id="searchField" 
+                        name="search_term"
+                        value={address}
+                        onChange={handleChangeSearch}
+                        required
+                    />
+                    <button 
+                        class="btn btn-outline-success" 
+                        onClick={getNfts}
+                    >Search for NFTs
+                    </button>
+                    </form>
+                </div>
+                <div class="row">
+                    {renderItems()}
+                </div>
+            </Layout>
         </>
     );
 }

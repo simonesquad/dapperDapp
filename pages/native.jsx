@@ -1,21 +1,42 @@
 import Moralis from 'moralis';
 import { EvmChain } from '@moralisweb3/evm-utils';
 import { CryptoLogos } from '@web3uikit/core';
+import Layout from './components/layout';
+import Link from 'next/link';
 
 function Native({ nativeBalance, address }) {
     return (
-        <div class="d-flex flex-column mb-3">
-            <div class="p-2">
-                <h3>Wallet: {address}</h3>
+        <Layout>
+            <div class="container-fluid">
+                <div class="col-6">
+                <div class="row">
+                    <div class="card" style={{ width: "38rem" }}>
+                        <div class="card-header">
+                            Your Native Balance
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                            <h6>Wallet: {address}</h6>
+                            </li>
+                            <li class="list-group-item">
+                            <h6>Native Balance: {nativeBalance}</h6>
+                            <CryptoLogos 
+                                chain="ethereum"
+                                size="28px"
+                            />
+                            </li>
+                        </ul>    
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <Link href="/">
+                    <button type="button" class="btn btn-secondary">Back</button>
+                    </Link>
+                </div>
+                </div>
             </div>
-            <div class="p-2">
-                <h3>Native Balance: {nativeBalance} ETH</h3>
-                <CryptoLogos 
-                    chain="ethereum"
-                    size="48px"
-                />
-            </div>
-        </div>
+        </Layout>
     );
 }
 
